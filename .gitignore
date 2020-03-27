@@ -283,4 +283,5 @@ mallonga/media/
 
 .pytest_cache/
 
-
+.vscode/
+db.sqlite3
