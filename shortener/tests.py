@@ -1,4 +1,7 @@
 from unittest import mock
+
+from bs4 import BeautifulSoup
+
 from django.test import TestCase
 from django.urls import reverse
 from shortener.models import random_hash, UrlModel
@@ -57,6 +60,31 @@ class UrlHitTestCase(TestCase):
         self.assertEqual(response.get('Location'), link.url)
         link.refresh_from_db()
         self.assertEqual(link.hits, 1)
+
+    def test_home(self):
+        # Initially, we don't hava any url
+        self.assertEquals(UrlModel.objects.count(), 0)
+
+        # Now let's visit home and submit an url 
+        resp = self.client.get(reverse('home'))
+        self.assertEqual(resp.status_code, 200)
+        soup = BeautifulSoup(resp.content, 'html.parser')
+
+        # We should have an empty form on that page
+        self.assertEqual(soup.form.attrs, {'method': 'POST', 'action': '/'})
+        self.assertTrue(soup.form.input.getText() == '')
+
+        # Now let's post a url
+        resp = self.client.post(
+            reverse('home'),
+            {'url': 'http://www.example.com/biz/bas/foo/bar.html'}
+        )
+        self.assertEquals(UrlModel.objects.count(), 1)
+        url = UrlModel.objects.get(pk=1)
+        soup = BeautifulSoup(resp.content, 'html.parser')
+        self.assertIn('class', soup.header.attrs)
+        self.assertIn('shortened_url', soup.header.attrs['class'])
+        self.assertEqual(soup.header.h2.getText().strip(), url.get_absolute_url())
 
 
 class Top100TestCase(TestCase):

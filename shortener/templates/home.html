@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0"
+        name="viewport">
+  <title>Noe's URL shortener</title>
+</head>
+<body>
+    {% if urlobj %}
+    <header id="shortened_url" class="shortened_url">
+      Your URL is: <h2> {{ urlobj.get_absolute_url }}</h2>
+    </header>
+    {% else %}
+    <header>
+      <h1>Welcome to Noe's URL shortener</h1>
+    </header>
+    {% endif %}
+
+  <section>
+    <h3>Shorten your link</h3>
+    <form method="POST" action="{% url 'home' %}">
+      {{form.as_p}}
+      <input type="submit" value="Go">
+    </form>
+  </section>
+  <section>
+    <h3>Top 100</h3>
+    <p>These are the top 100 urls</p>
+    <table>
+      <tr>
+        <th>Ranking</th>
+        <th>Title</th>
+        <th>Short Url</th>
+        <th>Original</th>
+      </tr>
+      <tr>
+        <td>#</td>
+        <td>Yet another site</td>
+        <td>http://foo.bar/xt3qdas</td>
+        <td> <a href="http://www.example.com/really/long_url" target="_blank" rel="noopener noreferrer">Link</a> </td>
+      </tr>
+    </table>
+  </section>
+  <footer>
+  Copyright (c) 2020 Noe Nieto <nnieto@noenieto.com>
+  </footer>
+</body>
+</html>

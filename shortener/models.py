@@ -4,6 +4,7 @@ from urllib.request import urlopen
 
 from django.urls import reverse
 from django.db import models
+from django.conf import settings
 
 from bs4 import BeautifulSoup
 
@@ -31,7 +32,9 @@ class UrlModel(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("short_url", kwargs={"code": self.code})
+        proto = settings.APP_HTTPS and 'https' or 'http' 
+        domain = settings.APP_DOMAIN
+        return f'{proto}://{domain}/{self.code}'
 
     def process_url(self):
         with urlopen(self.url) as response:

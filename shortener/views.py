@@ -6,9 +6,7 @@ from .models import UrlModel
 
 
 class UrlForm(forms.Form):
-    url = forms.CharField(label='Shorten the URL', max_length=2000)
-
-
+    url = forms.URLField(label='Shorten the URL', max_length=2000)
 
 # Create your views here.
 def serve_short_url(request, code):
@@ -19,6 +17,7 @@ def serve_short_url(request, code):
 
 
 def home(request, template_name="home.html"):
+    urlobj = None
     if request.method == 'POST':
         form = UrlForm(request.POST)
         if form.is_valid():
@@ -27,4 +26,4 @@ def home(request, template_name="home.html"):
     else:
         form = UrlForm()
 
-    return render(request, 'name.html', RequestContext(request, {'form': form}))
+    return render(request, template_name, {'form': form, 'urlobj': urlobj})
