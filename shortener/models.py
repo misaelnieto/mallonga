@@ -1,7 +1,13 @@
 import string
 import random
+from urllib.request import urlopen
+
 from django.urls import reverse
 from django.db import models
+
+from bs4 import BeautifulSoup
+
+
 
 def random_hash():
     """
@@ -26,3 +32,8 @@ class UrlModel(models.Model):
 
     def get_absolute_url(self):
         return reverse("short_url", kwargs={"code": self.code})
+
+    def process_url(self):
+        with urlopen(self.url) as response:
+            soup = BeautifulSoup(response, 'html.parser')
+            self.title = soup.title.text
