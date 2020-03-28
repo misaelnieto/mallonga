@@ -14,7 +14,7 @@ def random_hash():
     TODO: This is just a placeholder function. We will remove it later
     """
     alphabet = string.ascii_letters + string.digits
-    return ''.join(random.choices(alphabet, k=5))
+    return ''.join(random.choices(alphabet, k=8))
 
 
 class UrlModel(models.Model):
