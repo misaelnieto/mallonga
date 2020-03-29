@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0"
+        name="viewport">
+  <title>Noe's URL shortener - Top 100</title>
+</head>
+<body>
+    <header>
+        <h1>Noe's URL shortener: top 100 links</h1>
+    </header>
+    <section>
+        <h3>Top 100</h3>
+        <p>These are the top 100 urls</p>
+        <table class="top100">
+            <thead>
+                <tr>
+                    <th>Ranking</th>
+                    <th>Title</th>
+                    <th>Short Url</th>
+                    <th>Original</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for link in top100 %}
+                <tr>
+                    <td>{{ forloop.revcounter }}</td>
+                    <td>{{ link.title }}</td>
+                    <td>{{ link.url }}</td>
+                    <td> <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">Link</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+  <footer>
+  Copyright (c) 2020 Noe Nieto <nnieto@noenieto.com>
+  </footer>
+</body>
+</html>

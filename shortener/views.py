@@ -15,6 +15,12 @@ def serve_short_url(request, code):
     urlobj.save()
     return redirect(urlobj.url, permanent=True)
 
+def top100(request, template_name="top100.html"):
+    return render(
+        request,
+        template_name,
+        {'top100': UrlModel.objects.order_by('-hits')[:100]}
+    )
 
 def home(request, template_name="home.html"):
     urlobj = None

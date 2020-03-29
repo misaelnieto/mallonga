@@ -80,14 +80,14 @@ class UrlHitTestCase(TestCase):
             {'url': 'http://www.example.com/biz/bas/foo/bar.html'}
         )
         self.assertEquals(UrlModel.objects.count(), 1)
-        url = UrlModel.objects.get(pk=1)
-        soup = BeautifulSoup(resp.content, 'html.parser')
-        self.assertIn('class', soup.header.attrs)
-        self.assertIn('shortened_url', soup.header.attrs['class'])
-        self.assertEqual(soup.header.h2.getText().strip(), url.get_absolute_url())
 
 
 class Top100TestCase(TestCase):
+    fixtures = ['shortener/fixtures/links.json']
     def test_top100_links(self):
-        foobar()
-        self.assertEqual(something, 1000)
+        # generate urls?
+        resp = self.client.get(reverse('top100'))
+        soup = BeautifulSoup(resp.content, 'html.parser')
+        table = soup.find('table', class_="top100")
+        rows = len(table.tbody.findAll('tr'))
+        self.assertEqual(rows, 100)
