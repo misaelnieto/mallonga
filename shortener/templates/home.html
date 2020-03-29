@@ -2,48 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1.0"
-        name="viewport">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Noe's URL shortener</title>
+  <style>*+*{box-sizing:border-box;margin:.5em 0}@media(min-width:35em){.col{display:table-cell}.\31{width:5%}.\33{width:22%}.\34{width:30%}.\35{width:40%}.\32{width:15%}.row{display:table;border-spacing:1em 0}}.row,.w-100{width:100%}.card:focus,hr{outline:0;border:solid #fa0}.card,pre{padding:1em;border:solid #eee}.btn:hover,a:hover{opacity:.6}.c{max-width:60em;padding:1em;margin:auto;font:1em/1.6 Arial}h6{font:300 1em Arial}h5{font:300 1.2em Arial}h3{font:300 2em Arial}h4{font:300 1.5em Arial}h2{font:300 2.2em Arial}h1{font:300 2.5em Arial}a{color:#fa0;text-decoration:none}.btn.primary{color:#fff;background:#fa0;border:solid #fa0}pre{overflow:auto}td,th{padding:1em;text-align:left;border-bottom:solid #eee}.btn{padding:1em;letter-spacing:.1em;text-transform:uppercase;background:#fff;border:solid;font:.7em Arial}</style>
+  <style>
+    body {
+      background-color: #F7BEC0;
+      color:#E7625F;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    .card,.card:focus {
+      border-color: #FFFFFF;
+    }
+    .btn.primary {
+      border-color: #ffffff;
+      background-color: #FFFFFF;
+      color: #E7625F;
+      font-size: large;
+    }
+    a {
+      color:#C85250;
+      border-bottom: 1px solid #C85250;
+    }
+  </style>
 </head>
 <body>
-    {% if urlobj %}
-    <header id="shortened_url" class="shortened_url">
-      Your URL is: <h2> {{ urlobj.get_absolute_url }}</h2>
-    </header>
-    {% else %}
-    <header>
-      <h1>Welcome to Noe's URL shortener</h1>
-    </header>
-    {% endif %}
+    <div class="c">
+      <section class="row">
+        {% if urlobj %}
+        <header id="shortened_url" class="shortened_url">
+          Your URL is: <h2> {{ urlobj.get_absolute_url }}</h2>
+        </header>
+        {% else %}
+        <header>
+          <h1>Noe's URL shortener</h1>
+        </header>
+        {% endif %}
+      </section>
 
-  <section>
-    <h3>Shorten your link</h3>
-    <form method="POST" action="{% url 'home' %}">
-      {{form.as_p}}
-      <input type="submit" value="Go">
-    </form>
-  </section>
-  <section>
-    <h3>Top 100</h3>
-    <p>These are the top 100 urls</p>
-    <table>
-      <tr>
-        <th>Ranking</th>
-        <th>Title</th>
-        <th>Short Url</th>
-        <th>Original</th>
-      </tr>
-      <tr>
-        <td>#</td>
-        <td>Yet another site</td>
-        <td>http://foo.bar/xt3qdas</td>
-        <td> <a href="http://www.example.com/really/long_url" target="_blank" rel="noopener noreferrer">Link</a> </td>
-      </tr>
-    </table>
-  </section>
-  <footer>
-  Copyright (c) 2020 Noe Nieto <nnieto@noenieto.com>
-  </footer>
+      <section class="row">
+        <form method="POST" action="{% url 'home' %}">
+          <div class="row">
+            <div class="12 col">
+                <input class="card w-100" type="url" placeholder="Paste the url here">
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn primary">Shorten the url &#9986;</button>
+          </div>
+        </form>
+      </section>
+      <section>
+        <a href="{% url 'top100' %}">Top 100 links</a>
+      </section>
+    <footer>
+    Copyright (c) 2020 Noe Nieto <nnieto@noenieto.com>
+    </footer>
+
+    </div>
 </body>
 </html>
