@@ -9,7 +9,6 @@ from django.conf import settings
 from bs4 import BeautifulSoup
 
 
-
 def random_hash():
     """
     TODO: This is just a placeholder function. We will remove it later
@@ -32,9 +31,11 @@ class UrlModel(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        proto = settings.APP_HTTPS and 'https' or 'http' 
-        domain = settings.APP_DOMAIN
-        return f'{proto}://{domain}/{self.code}'
+        if hasattr(settings, 'APP_DOMAIN'):
+            proto = getattr(settings, 'APP_HTTPS', False) and 'https' or 'http'
+            domain = settings.APP_DOMAIN
+            return f'{proto}://{domain}/{self.code}'
+        return reverse('short_url', args=[self.code,])
 
     def process_url(self):
         with urlopen(self.url) as response:
