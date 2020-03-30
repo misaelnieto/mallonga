@@ -28,5 +28,4 @@ jobs:
     - name: Run Tests
       run: |
         pipenv run python manage.py test
-    - name: Run coverage
-      uses: dc740/django-coveragepy-github-action@0.9
+
