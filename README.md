@@ -8,7 +8,7 @@ excellent oportunity to hone my skills with TDD, BDD and GitHub Actions.
 
 ## For users of the demo
 
-If you want to use the demo site, just go to http://xxx.li and paste some url on
+If you want to use the demo site, just go to https://eta.noenieto.com/ and paste some url on
 the form and hit the submit button.
 
 These are the decision, tools and/or skills I used to develop this application:
