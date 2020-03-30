@@ -1,5 +1,7 @@
 # Mallonga - Noe's url shortener
 
+![Django CI](https://github.com/misaelnieto/mallonga/workflows/Django%20CI/badge.svg)
+
 Hello, this repo contains a Django app that implements the logic of a very
 simple url shortener. I wrote this as a part of a job interview, so this was an
 excellent oportunity to hone my skills with TDD, BDD and GitHub Actions.
