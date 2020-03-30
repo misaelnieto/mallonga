@@ -20,8 +20,6 @@ jobs:
         sudo apt-get install python${{ matrix.python-version }}
     - name: Install pipenv
       uses: dschep/install-pipenv-action@v1
-    - name: Install pipenv
-      uses: dschep/install-pipenv-action@v1
     - name: Run Tests
       run: |
         pipenv --python ${{ matrix.python-version }} install
