@@ -284,4 +284,5 @@ mallonga/media/
 .pytest_cache/
 
 .vscode/
-db.sqlite3
+*.sqlite3
+mallonga/settings_test.py

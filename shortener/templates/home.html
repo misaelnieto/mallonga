@@ -43,9 +43,11 @@
 
       <section class="row">
         <form method="POST" action="{% url 'home' %}">
+          {% csrf_token %} 
+          <div class="row card">{{ form.url.errors }}</div>
           <div class="row">
             <div class="12 col">
-                <input class="card w-100" type="url" placeholder="Paste the url here">
+                <input class="card w-100" type="url" name="url" id="id_url" placeholder="Paste the url here" maxlength="2000" required="">
             </div>
           </div>
           <div class="row">

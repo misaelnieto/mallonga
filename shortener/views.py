@@ -15,6 +15,7 @@ def serve_short_url(request, code):
     urlobj.save()
     return redirect(urlobj.url, permanent=True)
 
+
 def top100(request, template_name="top100.html"):
     return render(
         request,
@@ -27,7 +28,7 @@ def home(request, template_name="home.html"):
     if request.method == 'POST':
         form = UrlForm(request.POST)
         if form.is_valid():
-            urlobj = UrlModel(url=form['url'])
+            urlobj = UrlModel(url=form.cleaned_data['url'])
             urlobj.save()
     else:
         form = UrlForm()

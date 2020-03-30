@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 Django ="~=3.0"
 beautifulsoup4 = "~=4.8"
+uwsgi = "*"
+pysqlite3_binary = "==0.4.2"
 
 [dev-packages]
 pylint = "*"
