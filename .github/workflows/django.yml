@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.7
@@ -25,6 +23,5 @@ jobs:
     - name: Run Tests
       run: |
         pipenv run python manage.py test
-    - name: install ubutnu package
-      run: apt install python3.7 python3.8
+
 
