@@ -2,7 +2,13 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+__import__('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+print('#'*80)
+print('Python interpreter:', sys.executable)
+print('Python version:', sys.version)
+print('Monkeypatched SQLite version:', sys.modules['sqlite3'].sqlite_version)
+print('#'*80)
 
 def main():
     if 'test' in sys.argv:
