@@ -21,6 +21,16 @@ class HashTests(TestCase):
         url.save()
         self.assertNotEqual(url.code, '', 'Upon saving, the code has been generated')
 
+    def test_save(self):
+        # Ensure the code doesn't change after it got generated
+        url = UrlModel(url="http://example.com/abcd/efg.htmla=4324225434324&b=ddasda")
+        self.assertEqual(url.code, '')
+        url.save()
+        code = url.code
+        url.title = "Waba waba dub dub"
+        url.save()
+        self.assertEqual(code, url.code)
+
 
 mock_page = b'''
 <html>

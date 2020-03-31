@@ -27,7 +27,8 @@ class UrlModel(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        self.code = random_hash()
+        if not self.code:
+            self.code = random_hash()
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
