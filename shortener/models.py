@@ -40,4 +40,7 @@ class UrlModel(models.Model):
     def process_url(self):
         with urlopen(self.url) as response:
             soup = BeautifulSoup(response, 'html.parser')
-            self.title = soup.title.text
+            if soup.title:
+                self.title = soup.title.text
+            else:
+                self.title = self.url
